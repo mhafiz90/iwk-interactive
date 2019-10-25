@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Scatterplot</title>
+    <meta name="description" content="This is a template file to build a scatterplot chart.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Chart title</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Chart description</div> 
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='#' target='_blank'>Your data source</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>Other notes for the chart
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container', 
+                type: 'scatter',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            //INPUT: Variable label displayed on xAxis
+            xAxis: {
+                title: {
+                  text:'Variable A',
+                },
+                endOnTick: false,
+            },
+
+            //INPUT: Variable label displayed on yAxis
+            yAxis: {    
+                title: {
+                    text: 'Variable B',
+                },
+                endOnTick: false,
+            },
+            
+            credits: { enabled: false, },
+            legend:{enabled: false,},
+            
+            plotOptions: {
+                scatter: {
+                    marker: {
+                        radius: 5,
+                        fillColor: '#FF7F00',
+                        //The markers should have lineColor and liveWidth if there are overlapping markers
+                        lineColor: '#D3D3D3',
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                lineColor: '#33333c'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{point.key}</b><br>',
+                        pointFormat: 'Variable A: <b>{point.x}</b><br>Variabel B: <b>{point.y}</b>'
+                    }
+                }
+            },
+
+            //Your data. The "name" will appear in tootltip as "{point.key}"
+            series: [{data:[
+                {"name":"San Bernardino","x":2100,"y":14},
+                {"name":"Brussels","x":1900,"y":31},
+                {"name":"Burkina Faso","x":1113,"y":30},
+                {"name":"Mali","x":1020,"y":20},
+                {"name":"Ivory Coast","x":733,"y":18},
+                {"name":"Jakarta","x":132,"y":8},
+                {"name":"Ankara (Mar 13)","x":121,"y":37},
+                {"name":"Tunisia","x":71,"y":13},
+                {"name":"Istanbul","x":50,"y":13},
+                {"name":"Somalia","x":69,"y":20},
+                {"name":"Ankara (Feb 17)","x":65,"y":29},
+              ],
+              //labels on markers
+                dataLabels: {
+                    enabled: false,
+                    rotation: 0,
+                    align: 'center',
+                    format: '{point.name}',
+                    y: -8,
+                    style: {
+                        fontSize: '10px',
+                    }
+                },
+
+            }],
+        });  
+    });      
+});
+</script>
