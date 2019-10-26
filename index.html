@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
 <style>
-			html,body{font-size:22px;font-weight:400;background:#222}
+			html,body{font-size:22px;font-weight:400;background:#fff}
 			h1,h2{font-family:'Roboto Slab', serif}
 			h1{color:#4591db}
 			h2{font-size:30px;font-weight:400;line-height:1.2em;text-align:center}
@@ -42,15 +42,14 @@
 			blockquote{font-size:24px;font-style:normal}
 			blockquote cite{font-size:16px;font-style:normal}
 			#chart-container-1{
-                height: 300px;
-                max-width: 800px;
+                height: 200px;
+                width: 100%;
                 position:relative;
                 z-index:0 !important;
                 margin: 0px auto;
             }
 			.chart-text-wrapper{position:relative;z-index:99999!important;pointer-events: none;}
 			.scroll-text{color:#fff;border-radius:5px}
-            #guess-value {color:#222;text-align: center;}
 
 			@media screen and (max-width:500px){
 				.scroll-text{margin-bottom:550px !important}
@@ -137,47 +136,37 @@
             <h1 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">The</span> <br>ICERD<br>outrage</h1>
             <p class="uk-margin-small-top uk-margin-remove-bottom uk-text-center" style="color:#4591db"></p>
             <hr class="uk-divider-small">
-            <p>Malaysia is one of only two Muslim-majority countries in the world that have not ratified the International Convention on the Elimination of All Forms of Racial Discrimination (ICERD).</p>
-            <p>On 23 Nov 2018, the Pakatan Harapan government decided against acceding to ICERD after weeks of racially and religiously charged protests.</p>
-            <p>ICERD was initiated by the United Nations (UN) in 1965 to deal with global racial intolerance but in Malaysia, it was perceived as a threat to bumiputera special privileges (Article 153) and Islam.</p>
+            <p>Have you ever checked your water bill to understand how much water your household use every month? Do you know where does the water go when you flush it down the toilet or kitchen sink?</p> 
+            <p>Despite more and longer water disruptions in recent years, especially in urban areas, most of us continue to take our water supply and disposal for granted. This interactive webpage will help you understand the issue and reveal some surprises.</p>
             <br>
         </div>
     </section>
 </div>
 
-<section id="section-chart" class="uk-section uk-section-secondary" style="background:#fff">
-    <div uk-sticky="offset: 60; bottom:true">
-        <div id="chart-container-1"></div>
-        <div id="guess-value"></div>
+<section id="section-chart" class="uk-section">
+    <div class="chart-wrapper-1 uk-animation-fade uk-text-center" uk-sticky="offset: 50; bottom:true">
+        <div class="uk-align-center" style="max-width: 800px">
+            <div class="uk-align-center uk-padding-small" id="box-above-chart" style="opacity:0"><p>Each Malaysian uses <span id="show-value">0</span> litres of water per day for household purposes.</p></div>
+            <div id="chart-container-1"></div>
+            <div id="box-below-chart" style="opacity:0">
+                <div uk-grid>
+                    <div class="uk-width-1-2 uk-text-right">Your guess</div>
+                    <div class="uk-width-1-2 uk-text-left"><span id="guess-value">0</span> litres</div>
+                </div>
+                <button id="guess-btn" type="button" class="uk-button uk-button-default uk-align-center" disabled="true">Submit</button>
+            </div>
+            <div id="answer-box-1">
+                <p><span id="answer1"></span></p>
+                <p></p>
+            </div>  
+        </div>  
     </div>
     <div>
-    <ul class="chart-text-wrapper uk-list uk-container uk-container-xsmall uk-text-center" uk-scrollspy="cls: uk-animation-fade; target: > li; repeat: true">
-    <li id="chart-1-text-1" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>As of Nov 2018, <span class="signed uk-text-nowrap">179 countries</span> have ratified ICERD.</p>
-    </li>
-    <li id="chart-1-text-2" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p><span class="unsigned">Malaysia</span> is one of only 18 countries in the world that have not ratified ICERD.</p>
-    </li>
-    <li id="chart-1-text-3" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>Not ratifying ICERD, Malaysia joins the ranks of <span class="unsigned uk-text-nowrap">North Korea</span>, <span class="unsigned">Myanmar</span>, <span class="unsigned">Angola</span>,
-    <span class="unsigned">Bhutan</span>, <span class="unsigned">Brunei</span> and a new state - <span class="unsigned uk-text-nowrap">South Sudan</span>.</p>
-    </li>
-    <li id="chart-1-text-4" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>The remaining countries are all <span class="unsigned">small islands</span> namely Cook Islands, Dominica, Kiribati, Marshall Islands, Micronesia, Niue, Samoa, Tuvalu, Vanuatu, Nauru and Palau.</p>
-    </li>
-    </li>
-    <li id="chart-1-text-5" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>In the Muslim world, all <span class="signed-muslim">Muslim-majority</span> countries have ratified ICERD, except two.</p>
-    </li>
-    <li id="chart-1-text-6" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p><span class="signed-muslim">Saudi Arabia</span>, <span class="signed-muslim">Iran</span>, <span class="signed-muslim">Indonesia</span>, <span class="signed-muslim">Palestine</span>,
-    <span class="signed-muslim">Egypt</span>, <span class="signed-muslim">Pakistan</span>, <span class="signed-muslim">Iraq</span> and <span class="signed-muslim">Turkey</span>
-    are among the 55 Organisation of Islamic Cooperation (OIC) countries that have ratified Icerd.</p>
-    </li>
-    <li id="chart-1-text-7" class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>The only two Muslim-majority countries that have not ratified ICERD are <span class="unsigned">Malaysia</span> and <span class="unsigned">Brunei</span>.</p>
-    </li>
-    </ul>
+        <ul class="chart-text-wrapper uk-list uk-container uk-container-xsmall uk-text-center" uk-scrollspy="cls: uk-animation-fade; target: > li; repeat: true">
+            <li id="chart-1-text-1" class="scroll-text uk-overlay-primary uk-padding-small">
+            <p>Let’s start with a basic test of your water knowledge. How much water do you think each Malaysian use daily for household purposes compared to the world?</p>
+            </li>
+        </ul>
     </div>
 </section>
 
