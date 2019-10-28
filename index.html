@@ -46,13 +46,21 @@
 
             #chart-container-1{
                 height: 200px;
-                width: 100%;
+                max-width: 600px;
                 position:relative;
                 z-index:0 !important;
                 margin: 0px auto;
             }
-            .answer1-num {color: #FF7F00;}
-            #guess-value {color: #E41A1C;}
+            .answer1-num {color: #4188BC;}
+            #guess-value, #show-value {color: #E41A1C;}
+            #chart-container-2{
+                height: 300px;
+                max-width: 600px;
+                position:relative;
+                z-index:0 !important;
+                margin: 0px auto;
+            }
+            #chart-1-text-1 {margin-bottom:1700px !important; margin-top:-1000px !important;}
 
 			@media screen and (max-width:500px){
 				.scroll-text{margin-bottom:550px !important}
@@ -137,7 +145,7 @@
 
     <section class="uk-section uk-padding-small-bottom uk-position-z-index" style="background:linear-gradient(rgba(255,255,255,0.8),white)">
         <div class="uk-container uk-container-xsmall">
-            <h1 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">The</span> <br>ICERD<br>outrage</h1>
+            <h1 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">Title goes here</h1>
             <p class="uk-margin-small-top uk-margin-remove-bottom uk-text-center" style="color:#4591db"></p>
             <hr class="uk-divider-small">
             <p>Have you ever checked your water bill to understand how much water your household use every month? Do you know where does the water go when you flush it down the toilet or kitchen sink?</p> 
@@ -147,8 +155,8 @@
     </section>
 </div>
 
-<section id="section-chart" class="uk-section">
-    <div class="chart-wrapper-1 uk-animation-fade uk-container uk-container-xsmall uk-text-center" uk-sticky="offset: 50; bottom:true">
+<section id="section-chart" class="uk-section" style="padding-bottom:0px !important; margin-bottom: -80px !important;">
+    <div class="chart-wrapper-1 uk-text-center uk-container" uk-sticky="offset: 100; bottom: true">
         <div class="uk-align-center" style="max-width: 800px">
             <div class="uk-text-small" id="box-above-chart" style="opacity:0">Each Malaysian uses <span id="show-value">0</span> litres of water per day for household purposes.</div>
             <div id="chart-container-1"></div>
@@ -157,24 +165,24 @@
                 <button id="guess-btn" type="button" class="uk-button uk-button-default uk-align-center" style="visibility:hidden">Submit</button>
             </div>
             <div id="answer-box-1" style="opacity:0">
-                <div>Answer: <span class="uk-text-bold answer1-num uk-text-large">201</span> litres</div>
-                <p><span id="answer1">You’re a genius! You’ve got the exact answer. Hmm… are you cheating? Only <span id='compareUser'>0</span>% people who played this quiz got it right.</span></p>
-                
+                <div class="uk-padding-small">Answer: <span class="uk-text-bold answer1-num uk-text-large">201</span> litres</div>
+                <div class="uk-text-left"><p><span id="answer1">You’re a genius! You’ve got the exact answer. Hmm… are you cheating? Only <span id='compareUser'>0</span>% people who played this quiz got it right.</span></p></div>
+                <div class="uk-text-small">Household water consumption of selected countries</div>
+                <div id="chart-container-2"></div>
+                <div class="uk-text-left">The latest data shows that in 2017 the average Malaysian used <span class="answer1-num uk-text-bold">201</span> litres of water a day for household purposes like drinking, cooking, washing and showering. This number is <span class="answer1-num uk-text-bold">22%</span> more than the <span class="answer1-num uk-text-bold">165</span> liters recommended by the United Nations. We also used more water compared to our neighbours like Singapore (143 litres in 2017) and Thailand (90 litres in 2011).</div>
             </div>  
         </div>  
     </div>
     <div>
         <ul class="chart-text-wrapper uk-list uk-container uk-container-xsmall uk-text-center" uk-scrollspy="cls: uk-animation-fade; target: > li; repeat: true">
-            <li id="chart-1-text-1" class="scroll-text uk-overlay-primary uk-padding-small">
-            <p>Let’s start with a basic test of your water knowledge. How much water do you think each Malaysian use daily for household purposes compared to the world?</p>
-            </li>
+            <li id="chart-1-text-1" class="scroll-text uk-overlay-primary uk-padding-small"><p>Let’s start with a basic test of your water knowledge. How much water do you think each Malaysian use daily for household purposes compared to the world?</p></li>
         </ul>
     </div>
 </section>
 
-<section id="section-concerns">
+<section id="section-national">
     <div class="uk-section-default uk-height-viewport" uk-sticky="bottom:true" uk-scrollspy="cls: uk-animation-fade;">
-    <div class="uk-height-viewport" style="background:url('img/protest-1.jpg') no-repeat center center;background-size:cover;"></div>
+    <div class="uk-height-viewport" style="background:url('img/un.svg') no-repeat center center;background-size:cover;"></div>
     </div>
     <div class="uk-container uk-container-xsmall" style="margin-top:-462px">
     <ul class="chart-text-wrapper uk-list" uk-scrollspy="cls: uk-animation-fade; target: > li; repeat: true">
