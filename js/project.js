@@ -7,22 +7,65 @@ $(document).ready(function() {
     var answered;
     var clicked;
     var chart1Loaded;
-    
-    $('#chart-container-1').mousemove(function(e){    
+
+    var answers1 = [
+        "You’re a genius! You’ve got the exact answer. Hmm… are you cheating? Only <span id='compareUser'>0</span>% people before you got it right.",
+        "Bingo! Your guess is very close to the answer. Your guess is better than <span id='compareUser'>0</span>% of those who have played this quiz.",
+        "You’ve underestimated how much water Malaysians waste! <span id='compareUser'>0</span>% of those who have played this quiz performed better than you.",
+        "Malaysians are more prudent than you thought! <span id='compareUser'>0</span>% of those who have played this quiz performed better than you.",
+        "Seriously? Are you sure you can survive with this little water? Only <span id='compareUser'>0</span>% of those who have played this quiz performed worse than you.",
+        "No way! Malaysia might have run out of water if your guess is right. Only <span id='compareUser'>0</span>% of those who have played this quiz performed worse than you.",
+    ];
+
+    function getAnswer1(d) {
+        return d == 201 ? answers1[0] :
+               d >= 181 && d <= 221  ? answers1[1] :
+               d >= 101 && d <= 180  ? answers1[2] :
+               d >= 222 && d <= 301  ? answers1[3] :
+               d <= 100  ? answers1[4] :
+               answers1[5] ;
+    }
+
+    $('#chart-container-1').mousemove(function(e){      
         if (answered == 1){} else {
-          var xaxis = chart1.xAxis[0];
-          xaxis.removePlotLine('plot-line-x');
-          var x = xaxis.toValue(e.offsetX-11, true);
-          xaxis.addPlotLine({
-              value: x,
-              color: '#E41A1C',
-              width: 2,
-              id: 'plot-line-x',
-          });
-          guessX = x.toFixed(0);
-          $("#show-value").html(guessX);
+            var xaxis = chart1.xAxis[0];
+            xaxis.removePlotLine('plot-line-x');
+            var x = xaxis.toValue(e.offsetX-11, true);
+            console.log("move! point = " +x);   
+            xaxis.addPlotLine({
+                value: x,
+                color: '#E41A1C',
+                width: 2,
+                id: 'plot-line-x',
+            });
+            guessX = x.toFixed(0);
+            $("#show-value").html(guessX);
         }
     });  
+
+    //For mobile
+    $('#chart-container-1').on("touchmove", function(e) {       
+        // var touchstart = e.type === 'touchmove',
+        //     e = touchstart ? e.originalEvent : e,
+        //     pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+        //     pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+        if (answered == 1){} else {
+            e.preventDefault();
+            var touchX = e.touches[0].clientX;
+            var x = touchX + 18;
+            console.log("touch! point = " +x);   
+            var xaxis = chart1.xAxis[0];
+            xaxis.removePlotLine('plot-line-x');
+            xaxis.addPlotLine({
+                value: x,
+                color: '#E41A1C',
+                width: 2,
+                id: 'plot-line-x',
+            });
+            guessX = x.toFixed(0);
+            $("#show-value").html(guessX);
+        }
+    }); 
 
     $('#chart-container-1').click(function(e){    
         if (answered == 1){} else {
@@ -37,35 +80,23 @@ $(document).ready(function() {
                 id: 'point-new', 
             },true,false);
             $("#guess-value").html(guessX);
-            $('#guess-btn').removeAttr("disabled");
+            $('#guess-btn').css("visibility", "visible");
             clicked = 1;
         }
     });       
 
     $('#guess-btn').click(function(){
-      $('#guess-btn').attr('disabled','disabled');
+      console.log("guessed answer = " + guessX);  
+      $('#guess-btn').prop('disabled',true);
       answered = 1;
-    });
-
-//For mobile
-    // $('#chart-container-1').ontouchmove(function(e){    
-    //     var xaxis = chart1.xAxis[0];
-    //     xaxis.removePlotLine('plot-line-x');
-    //     var x = xaxis.toValue(e.offsetX, true);
-
-    //     xaxis.addPlotLine({
-    //         value: x,
-    //         color: '#d3d3d3',
-    //         width: 1,
-    //         id: 'plot-line-x'
-    //     });
-    //     $("#guess-value").html(x.toFixed(0));
-    //     console.log(x);
-    // });     
+      $("#answer1").html(getAnswer1(guessX));
+      $("#answer-box-1").fadeTo(500, 1);
+      $('#guess-btn').hide();
+    });    
 
     $("#chart-1-text-1").waypoint(function(direction) {
       if (direction === "down") {
-        $("#box-below-chart,#box-above-chart").fadeTo(200, 1, makeChart1());
+        $("#box-below-chart,#box-above-chart").fadeTo(500, 1, makeChart1());
         chart1Loaded = 1;
       } else {
         
@@ -89,16 +120,17 @@ $(document).ready(function() {
             },
             xAxis: {
                 title: {
-                  text:'litre per person per day',
+                  text:'litres per person per day',
                 },
-                endOnTick: true,
-                max:600,
-                min:0,
+                max:300,
+                min:50,
+                tickPositions: [50, 100, 200, 300]
             },
 
             yAxis: {    
-                title: {text: null,},
-                labels: {enabled: false}
+                title: {text: null},
+                labels: {enabled: false},
+                gridLineWidth: 2
             },
             tooltip: {enabled: false,},
             credits: { enabled: false, },
@@ -115,6 +147,7 @@ $(document).ready(function() {
                         borderRadius: 5,
                         borderWidth: 0.5,
                         borderColor: '#d3d3d3',
+                        backgroundColor: 'rgba(256, 256, 256, 0.9)',
                         shape: 'callout',
                         style:{
                             color: '#666',
@@ -133,10 +166,10 @@ $(document).ready(function() {
             },
             series: [{data:[
                 {"name":"Singapore<br>(2017)","x":143,"y":10, "color":'#FF7F00', dataLabels: {y:15,verticalAlign: 'top',}},
-                {"name":"UN recommendation","x":165,"y":10, "color":'#FF7F00', dataLabels: {x:80,}},
-                {"name":"Thailand<br>(2011)","x":90,"y":10, "color":'#FF7F00', dataLabels: {x:-10,}},
-                {"name":"Country A","x":410,"y":10, "color":'#FF7F00'},
-                {"name":"Country B","x":560,"y":10, "color":'#FF7F00'},
+                {"name":"UN<br>recommendation","x":165,"y":10, "color":'#FF7F00', dataLabels: {x:20,}},
+                {"name":"Thailand<br>(2011)","x":90,"y":10, "color":'#FF7F00', dataLabels: {x:0,}},
+                {"name":"US (2016)","x":222,"y":10, "color":'#FF7F00', dataLabels: {y:15,verticalAlign: 'top',}},
+                {"name":"Taiwan<br>(2018)","x":280,"y":10, "color":'#FF7F00'},
               ],
             }],
         });
