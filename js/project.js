@@ -6,6 +6,7 @@ $(document).ready(function() {
     var guessX;
     var answered;
     var clicked;
+    var clicked2;
     var chart1Loaded;
 
     var answers1 = [
@@ -26,6 +27,24 @@ $(document).ready(function() {
         {name:"Thailand (2011)",y:90},
     ];
 
+    var dataStateWater = [
+        {name:"Pulau Pinang",y:277},
+        {name:"Perlis",y:245},
+        {name:"Melaka",y:228},
+        {name:"Perak",y:227},
+        {name:"N. Sembilan",y:222},
+        {name:"Selangor, KL &amp;<br>Putrajaya",y:222},
+        {name:"Kedah",y:217},
+        {name:"Terengganu",y:204},
+        {name:"National<br>average",y:201, color:"#4188bc"},
+        {name:"Johor",y:200},
+        {name:"Pahang",y:190},
+        {name:"UN<br>recommendation",y:165, color:"#4188bc"},
+        {name:"Sarawak",y:165},
+        {name:"Kelantan",y:141},
+        {name:"Sabah",y:108},
+    ];
+
     function getAnswer1(d) {
         return d == 201 ? answers1[0] :
                d >= 181 && d <= 221  ? answers1[1] :
@@ -35,73 +54,38 @@ $(document).ready(function() {
                answers1[5] ;
     }
 
-    $('#chart-container-1').mousemove(function(e){      
-        if (answered == 1){} else {
-            var xaxis = chart1.xAxis[0];
-            xaxis.removePlotLine('plot-line-x');
-            var x = xaxis.toValue(e.offsetX-11, true);
-            console.log("move! x = " +x);   
-            xaxis.addPlotLine({
-                value: x,
-                color: '#E41A1C',
-                width: 2,
-                id: 'plot-line-x',
-            });
-            guessX = x.toFixed(0);
-            $("#show-value").html(guessX);
-        }
-    });  
-
-    //For mobile
-    // $('#chart-container-1').on("touchmove", function(e) {       
-    //     // var touchstart = e.type === 'touchmove',
-    //     //     e = touchstart ? e.originalEvent : e,
-    //     //     pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
-    //     //     pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
-    //     if (answered == 1){} else {
-    //         e.preventDefault();
-    //         var touchX = e.touches[0].clientX;
-    //         var x = touchX + 18;
-    //         console.log("touch! point = " +x);   
-    //         var xaxis = chart1.xAxis[0];
-    //         xaxis.removePlotLine('plot-line-x');
-    //         xaxis.addPlotLine({
-    //             value: x,
-    //             color: '#E41A1C',
-    //             width: 2,
-    //             id: 'plot-line-x',
-    //         });
-    //         guessX = x.toFixed(0);
-    //         $("#show-value").html(guessX);
-    //     }
-    // }); 
-
-    $('#chart-container-1').click(function(e){    
-        if (answered == 1){} else {
-            if(clicked == 1){
-                chart1.get('point-new').remove();
+    if (width<500){
+        //For mobile
+        $('#chart-container-1').on("touchmove", function(e) {       
+            // var touchstart = e.type === 'touchmove',
+            //     e = touchstart ? e.originalEvent : e,
+            //     pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+            //     pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+            if (answered == 1){} else {
+                e.preventDefault();
+                var touchX = e.touches[0].clientX;
+                var x = touchX + 18;
+                console.log("touch! point = " +x);   
+                var xaxis = chart1.xAxis[0];
+                xaxis.removePlotLine('plot-line-x');
+                xaxis.addPlotLine({
+                    value: x,
+                    color: '#E41A1C',
+                    width: 2,
+                    id: 'plot-line-x',
+                });
+                guessX = x.toFixed(0);
+                $("#guess-value").html(guessX);
+                $('#guess-btn').fadeIn();
             }
-            chart1.series[0].addPoint({
-                x:  guessX,
-                y:  10,
-                color: '#E41A1C',
-                marker: {radius: 7},   
-                id: 'point-new', 
-                name: 'Your guess',
-                dataLabels: {borderColor: '#E41A1C'}
-            },true,false);
-            $("#guess-value").html(guessX);
-            $('#guess-btn').css("visibility", "visible");
-            clicked = 1;
-        }
-    });       
+        }); 
 
-    $('#guess-btn').click(function(){
-        console.log("guessed answer = " + guessX);  
-        $('#guess-btn').prop('disabled',true);
-        answered = 1;
-        $("#answer1").html(getAnswer1(guessX));
-        chart1.series[0].addPoint({
+        $('#guess-btn').click(function(){
+            console.log("guessed answer = " + guessX);  
+            $('#guess-btn').prop('disabled',true);
+            answered = 1;
+            $("#answer1").html(getAnswer1(guessX));
+            chart1.series[0].addPoint({
                 x:  201,
                 y:  10,
                 color: '#4188BC',
@@ -110,17 +94,104 @@ $(document).ready(function() {
                 name: 'Malaysia<br>(2017)',
                 dataLabels: {borderColor: '#4188BC',}
             },true,false);
-        dataCountryWater.push({name:"Your guess", y:parseInt(guessX), color:"#E41A1C"});
-        dataCountryWater = dataCountryWater.sort(function (a, b) {
-            return b.y - a.y;
-        });
-        var dataCountryWater_cat=[];
-        for (var i = 0; i < dataCountryWater.length; i++){
-            dataCountryWater_cat.push(dataCountryWater[i].name);
+            chart1.series[0].addPoint({
+                x:  guessX,
+                y:  10,
+                color: '#E41A1C',
+                marker: {radius: 7},   
+                id: 'point-new', 
+                name: 'Your guess',
+                dataLabels: {borderColor: '#E41A1C'}
+            },true,false);                
+            dataCountryWater.push({name:"Your guess", y:parseInt(guessX), color:"#E41A1C"});
+            dataCountryWater = dataCountryWater.sort(function (a, b) {
+                return b.y - a.y;
+            });
+            var dataCountryWaterCat=[];
+            for (var i = 0; i < dataCountryWater.length; i++){
+                dataCountryWaterCat.push(dataCountryWater[i].name);
+            }
+            $("#answer-box-1").fadeTo(500, 1, makeChart2(dataCountryWaterCat));
+            $('#guess-btn').hide();
+        });         
+
+
+    } else {
+        // For desktop
+        $('#chart-container-1').mousemove(function(e){      
+            if (answered == 1){} else {
+                var xaxis = chart1.xAxis[0];
+                xaxis.removePlotLine('plot-line-x');
+                var x = xaxis.toValue(e.offsetX-11, true); 
+                xaxis.addPlotLine({
+                    value: x,
+                    color: '#E41A1C',
+                    width: 2,
+                    id: 'plot-line-x',
+                });
+                guessX = x.toFixed(0);
+                $("#guess-value").html(guessX);
+            }
+        });  
+    
+        $('#chart-container-1').click(function(e){    
+            if (answered == 1){} else {
+                if(clicked == 1){
+                    chart1.get('point-new').remove();
+                }
+                chart1.series[0].addPoint({
+                    x:  guessX,
+                    y:  10,
+                    color: '#E41A1C',
+                    marker: {radius: 7},   
+                    id: 'point-new', 
+                    name: 'Your guess',
+                    dataLabels: {borderColor: '#E41A1C'}
+                },true,false);
+                $("#guess-value").html(guessX);
+                clicked = 1;
+                answered = 1;
+                $("#answer1").html(getAnswer1(guessX));
+                chart1.series[0].addPoint({
+                        x:  201,
+                        y:  10,
+                        color: '#4188BC',
+                        marker: {radius: 7},   
+                        id: 'point-my', 
+                        name: 'Malaysia<br>(2017)',
+                        dataLabels: {borderColor: '#4188BC',}
+                    },true,false);
+                dataCountryWater.push({name:"Your guess", y:parseInt(guessX), color:"#E41A1C"});
+                dataCountryWater = dataCountryWater.sort(function (a, b) {
+                    return b.y - a.y;
+                });
+                var dataCountryWaterCat=[];
+                for (var i = 0; i < dataCountryWater.length; i++){
+                    dataCountryWaterCat.push(dataCountryWater[i].name);
+                }
+                $("#answer-box-1").fadeTo(500, 1, makeChart2(dataCountryWaterCat));
+                // $('#guess-btn').hide();            
+            }
+        }); 
+
+    }  
+    
+    $(".btnState").click(function(){
+        if (clicked2 == 1){}else{
+            var yourState = $(this).html(); 
+            console.log("your state = " + yourState);
+            var dataStateWaterCat = [];
+            for (var i = 0; i < dataStateWater.length; i++){
+                dataStateWaterCat.push(dataStateWater[i].name);
+                if (dataStateWater[i].name == yourState){
+                    dataStateWater[i].color = "#E41A1C";
+                    dataStateWater[i].note = "Your state";
+                }
+            }
+            $("#answer-box-2").fadeTo(500, 1, makeChart3(dataStateWaterCat));
+            clicked2 = 1;
         }
-        $("#answer-box-1").fadeTo(500, 1, makeChart2(dataCountryWater_cat));
-        $('#guess-btn').hide();
-    });    
+    });
 
     $("#chart-1-text-1").waypoint(function(direction) {
       if (direction === "down") {
@@ -132,6 +203,17 @@ $(document).ready(function() {
     }, {
       offset: "40%"
     });
+
+    $("#chart-2-text-1").waypoint(function(direction) {
+        if (direction === "down") {
+          $("#state-menu-container").fadeTo(500, 1, makeChart1());
+          chart1Loaded = 1;
+        } else {
+          
+        }
+      }, {
+        offset: "40%"
+      });
 
     function makeChart1() {
       if (chart1Loaded == 1){} else {
@@ -184,6 +266,7 @@ $(document).ready(function() {
                             fontWeight: 'normal',
                         },
                     },
+                    states: {hover: {enabled: false}},
                 },
                 scatter: {
                     marker: {
@@ -233,11 +316,10 @@ $(document).ready(function() {
                     stickyTracking: false,
                     dataLabels: {
                         enabled: true,
-                        style: {
-                            fontSize: '11px',
-                        },
-                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
-                        format: '{point.y:,.1f}',
+                        inside: true,
+                        align: 'right',
+                        style: {fontSize: '11px', textOutline: null},
+                        format: '{point.y}',
                     }
                 },
             },    
@@ -248,4 +330,62 @@ $(document).ready(function() {
             }],
         });
     }
+
+    function makeChart3(cat) {
+        chart3 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart-container-3',type: 'bar',
+                marginLeft: 105,
+            },
+            title: {text: null},
+            subtitle: {enabled: false},
+            xAxis: {categories: cat,
+                labels: {
+                    style: {
+                        whiteSpace: "nowrap",
+                    },
+                }
+            },  
+            yAxis: {
+                title: {text: 'litres per person per day', x:-40,},
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: '{point.key}<br>',
+                pointFormat: '<b>{point.y} litres</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        whiteSpace: "nowrap",
+                        enabled: true,
+                        
+                    },
+                },
+            },    
+            series: [{
+                dataLabels: [{
+                    style: {fontSize: '11px', textOutline: null},
+                    format: '{point.y}',
+                    
+                },{
+                    style: {fontSize: '11px', textOutline: null},
+                    format: '{point.note}',
+                    align: 'left',
+                    inside: true,
+                    x:-2,
+                }],
+                name:"Domestic water consumption", 
+                color:"#FF7F00", 
+                data: dataStateWater,
+            }],
+        });
+    }
+
+
 });     

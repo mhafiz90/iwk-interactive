@@ -43,24 +43,20 @@
 			blockquote cite{font-size:16px;font-style:normal}
 			.chart-text-wrapper{position:relative;z-index:99999!important;pointer-events: none;}
 			.scroll-text{color:#fff;border-radius:5px}
-
-            #chart-container-1{
-                height: 200px;
+            .chart-container {
                 max-width: 600px;
                 position:relative;
                 z-index:0 !important;
                 margin: 0px auto;
             }
+            #chart-container-1{height: 200px;}
+            #chart-container-2{height: 300px;}
+            #chart-container-3{height: 550px;}
             .answer1-num {color: #4188BC;}
             #guess-value, #show-value {color: #E41A1C;}
-            #chart-container-2{
-                height: 300px;
-                max-width: 600px;
-                position:relative;
-                z-index:0 !important;
-                margin: 0px auto;
-            }
-            #chart-1-text-1 {margin-bottom:1700px !important; margin-top:-1000px !important;}
+            #chart-1-text-1 {margin-bottom:1700px !important; margin-top:-800px !important;}
+            #chart-2-text-1 {margin-bottom:1700px !important; margin-top:-800px !important;}
+            .chart-wrapper-2 {max-width: 600px;z-index:0 !important;}
 
 			@media screen and (max-width:500px){
 				.scroll-text{margin-bottom:550px !important}
@@ -145,7 +141,7 @@
 
     <section class="uk-section uk-padding-small-bottom uk-position-z-index" style="background:linear-gradient(rgba(255,255,255,0.8),white)">
         <div class="uk-container uk-container-xsmall">
-            <h1 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">Title goes here</h1>
+            <h2 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">How much</span><br>water<br><span class="uk-text-large">Malaysians use<br>compared to the world?</span></h2>
             <p class="uk-margin-small-top uk-margin-remove-bottom uk-text-center" style="color:#4591db"></p>
             <hr class="uk-divider-small">
             <p>Have you ever checked your water bill to understand how much water your household use every month? Do you know where does the water go when you flush it down the toilet or kitchen sink?</p> 
@@ -155,20 +151,20 @@
     </section>
 </div>
 
-<section id="section-chart" class="uk-section" style="padding-bottom:0px !important; margin-bottom: -80px !important;">
+<section id="section-chart" class="uk-section" style="padding-bottom:0px !important;">
     <div class="chart-wrapper-1 uk-text-center uk-container" uk-sticky="offset: 100; bottom: true">
         <div class="uk-align-center" style="max-width: 800px">
-            <div class="uk-text-small" id="box-above-chart" style="opacity:0">Each Malaysian uses <span id="show-value">0</span> litres of water per day for household purposes.</div>
-            <div id="chart-container-1"></div>
+            <div class="uk-text-small" id="box-above-chart" style="opacity:0">Move your finger or hover over the chart to make your guess.</div>
+            <div id="chart-container-1" class="chart-container"></div>
             <div id="box-below-chart" style="opacity:0">
                 <div>Your guess: <span class="uk-text-bold" id="guess-value">0</span> litres</div>
-                <button id="guess-btn" type="button" class="uk-button uk-button-default uk-align-center" style="visibility:hidden">Submit</button>
+                <button id="guess-btn" type="button" class="uk-button uk-button-default uk-align-center" style="display:none">Submit</button>
             </div>
-            <div id="answer-box-1" style="opacity:0">
+            <div id="answer-box-1" class="uk-margin-medium-bottom" style="opacity:0">
                 <div class="uk-padding-small">Answer: <span class="uk-text-bold answer1-num uk-text-large">201</span> litres</div>
                 <div class="uk-text-left"><p><span id="answer1">You’re a genius! You’ve got the exact answer. Hmm… are you cheating? Only <span id='compareUser'>0</span>% people who played this quiz got it right.</span></p></div>
                 <div class="uk-text-small">Household water consumption of selected countries</div>
-                <div id="chart-container-2"></div>
+                <div id="chart-container-2" class="chart-container"></div>
                 <div class="uk-text-left">The latest data shows that in 2017 the average Malaysian used <span class="answer1-num uk-text-bold">201</span> litres of water a day for household purposes like drinking, cooking, washing and showering. This number is <span class="answer1-num uk-text-bold">22%</span> more than the <span class="answer1-num uk-text-bold">165</span> liters recommended by the United Nations. We also used more water compared to our neighbours like Singapore (143 litres in 2017) and Thailand (90 litres in 2011).</div>
             </div>  
         </div>  
@@ -181,41 +177,47 @@
 </section>
 
 <section id="section-national">
-    <div class="uk-section-default uk-height-viewport" uk-sticky="bottom:true" uk-scrollspy="cls: uk-animation-fade;">
-    <div class="uk-height-viewport" style="background:url('img/un.svg') no-repeat center center;background-size:cover;"></div>
+    <div class="uk-section-default uk-height-viewport" uk-scrollspy="cls: uk-animation-fade;">
+        <div class="uk-height-viewport" style="background:url('img/un.svg') no-repeat center center;background-size:cover;"></div>
     </div>
     <div class="uk-container uk-container-xsmall" style="margin-top:-462px">
-    <ul class="chart-text-wrapper uk-list" uk-scrollspy="cls: uk-animation-fade; target: > li; repeat: true">
-    <li class="scroll-text uk-overlay-primary">
-    <div>
-    <h2 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">How ICERD</span> <br>caught fire</h2>
-    <hr class="uk-divider-small">
-    </div>
-    </li>
-    <li class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>On 28 Sept 2018, Prime Minister Dr Mahathir Mohamad addressed the UN General Assembly, where he said:</p>
-    </li>
-    <li class="scroll-text uk-overlay-primary uk-padding-small">
-    <p><i>"...The new government of Malaysia has pledged to ratify all remaining core UN instruments related to the protection
-    of human rights.</i></p>
-    <p><i>"It will not be easy for us because Malaysia is multi-ethnic, multireligious, multicultural and multilingual. We will accord space and time for all to deliberate and to decide freely based on democracy."</i></p>
-    </li>
-    <li class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>Rembau MP Khairy Jamaluddin, when debating Mahathir's UN address in the Dewan Rakyat on 15 Oct 2018, raised concerns about ICERD's impact on bumiputera privileges.</p>
-    <p><i>"Will an expiry be imposed on Article 153 of the Federal Constitution which clearly grants different rights or special status to one group of people?"</i></p>
-    </li>
-    <li class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>Khairy's comments was picked up by Utusan Malaysia, which reported that ICERD would threaten the special position of Malays and Islam in the country.</p>
-    <p>What followed was a series of protests that brought conservative forces together and culminated with Umno and PAS announcing a mega rally against ICERD.</p>
-    </li>
-    <li class="scroll-text uk-overlay-primary uk-padding-small">
-    <p>Khairy based his concerns on Article 1(4) of ICERD, which allows race-based affirmative action but said it should not continue once the objective is achieved.</p>
-    <p>While several ministers stressed that "reservations" can be made to preserve Article 153, the idea that ICERD would overwrite Article 153 had become public perception.</p>
-    <li class="scroll-text uk-overlay-primary uk-padding-small" style="background:rgba(73,147,216,0.9)">
-    <p><strong>ICERD Article 1(4):</strong> Special measures taken for the sole purpose of securing adequate advancement of certain racial or ethnic groups... <strong>shall not be deemed racial discrimination</strong>, provided... they shall not be
-    continued after the objectives for which they were taken have been achieved.</p>
-    </li>
-    </ul>
+        <ul class="uk-list" uk-scrollspy="cls: uk-animation-fade; target: > li; repeat: true">
+            <li class="scroll-text uk-overlay-primary">
+                <h2 class="uk-heading-primary uk-text-uppercase uk-margin-remove uk-text-center" style="font-weight:700;line-height:1em;"><span class="uk-text-large">Water use</span><br>within Malaysia</h2>
+                <hr class="uk-divider-small">
+            </li>
+            <div class="chart-wrapper-2 uk-container uk-container-small" uk-sticky="offset: 100; bottom: #section-national">
+                <div id="state-menu-container" class="uk-container uk-margin-medium-bottom" style="opacity:0">
+                    <h2>Which state do you live in?</h2>
+                    <div id="mobileStateList" class="uk-child-width-1-2 uk-child-width-1-2@m uk-child-width-1-3@l uk-grid-small" uk-grid="margin:0">
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Perlis</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Kedah</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Kelantan</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Terengganu</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Pulau Pinang</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Perak</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Pahang</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">N. Sembilan</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Melaka</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Johor</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Sabah</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Sarawak</a></div>
+                        <div><a class="btnState uk-button uk-button-secondary uk-button-small uk-border-rounded uk-width-1-1 uk-text-capitalize" style="font-size:14px">Selangor, KL &<br>Putrajaya</a></div>
+                    </div>
+                </div>
+                <div id="answer-box-2" style="opacity:0">
+                    <div class="uk-text-small uk-text-center">Household water consumption by state in 2017</div>
+                    <div id="chart-container-3"  class="chart-container"></div>
+                    <div class="uk-text-left">
+                        <p>Penangites tops the chart with 277 litres per day, almost three times the amount used by Sabahans which is 108 litres per day. The data also show that domestic water consumption has little to do with people's income or urbanisation level as the top five states consist of both wealthier, more developed states (Pulau Pinang and Melaka) and those with lower income and less urbanised states (Perlis and Perak).</p>
+                        <p>Only three states - Sarawak, Kelantan and Sabah - meet the water use amount recommended by the United Nations. However this doesn't mean people in those states are better water savers. Compared to other states, less people (lower than 90%) in the three states have <a href="https://www.span.gov.my/article/view/population-served-2015-2016" target="_blank">access to public water supply</a>. Their water use from other alternative sources such well and river is not recorded in the data above.</p>
+                    </div>
+                </div>
+            </div>
+            <li id="chart-2-text-1" class="scroll-text uk-overlay-primary uk-padding-small uk-text-center">
+                <p>However, the average number doesn’t tell you the real picture because the amount of water used varies largely in different areas. Let's take a look at water consumption for household purposes in different states.</p>
+            </li>
+        </ul>
     </div>
 </section>
 
