@@ -5,17 +5,23 @@ $(document).ready(function() {
     var chart1a, chart1b, chart2, chart3a, chart3b; 
     var guessX, guessY;
     var answered1, answered2;
-    var clicked1, clicked2;
+    var clicked2, clicked3, clicked4;
     var chart1Loaded;
     var chart3Loaded;
 
     var answers1 = [
-        "You’re a genius! You’ve got the exact answer. Hmm… are you cheating? Only <span id='compareUser1'>0</span>% people before you got it right.",
-        "Bingo! Your guess is very close to the answer. Your guess is better than <span id='compareUser1'>0</span>% of those who have played this quiz.",
-        "You’ve underestimated how much water Malaysians waste! <span id='compareUser1'>0</span>% of those who have played this quiz performed better than you.",
-        "Malaysians are more prudent than you thought! <span id='compareUser1'>0</span>% of those who have played this quiz performed better than you.",
-        "Seriously? Are you sure you can survive with this little water? Only <span id='compareUser1'>0</span>% of those who have played this quiz performed worse than you.",
-        "No way! Malaysia might have run out of water if your guess is right. Only <span id='compareUser1'>0</span>% of those who have played this quiz performed worse than you.",
+        "You’re a genius! You’ve got the exact answer. are you cheating? Only <span id='compareUser1'>0</span>% people before you got it right.",
+        "Bingo! Your guess is very close to the answer. It is more accurate than <span id='compareUser1'>0</span>% of those who have played this quiz.",
+        "You’ve underestimated how much water Malaysians waste! <span id='compareUser1'>0</span>% of those who have played this quiz did better than you.",
+        "Malaysians are more prudent than you thought! <span id='compareUser1'>0</span>% of those who have played this quiz did better than you.",
+        "Seriously? Are you sure you can survive with this little water? Only <span id='compareUser1'>0</span>% of those who have played this quiz did worse than you.",
+        "No way! Malaysia might have run out of water if your guess is right. Only <span id='compareUser1'>0</span>% of those who have played this quiz did worse than you.",
+    ];
+
+    var answers2 = [
+        "Unbelievable! You’ve got the exact answer. IWK should offer you a job!",
+        "Not bad! Looks like you know the situation well.",
+        "Sorry, your guess is far from the actual charge rate. Go check your IWK bill!",
     ];
 
     var dataCountryWater = [
@@ -48,8 +54,11 @@ $(document).ready(function() {
     var dataCost = [
         {name:"Tokyo,<br>Japan", y:2.49},
         {name:"Sydney,<br>Australia", y:1.41},
+        {name:"London<br>UK",y: 1.20},
         {name:"Global<br>average", y:0.99},
         {name:"Singapore", y:0.71},
+        {name:"Johannesburg,<br>South Africa", y:0.53},
+        {name:"Istanbul<br>Turkey", y:0.44},
         {name:"Beijing,<br>China", y:0.20},
         {name:"Kuala Lumpur,<br>Malaysia", y:0.08, color:"#4188bc"},
         {name:"Hanoi,<br>Vietnam", y:0.03},
@@ -62,6 +71,12 @@ $(document).ready(function() {
                d >= 222 && d <= 301  ? answers1[3] :
                d <= 100  ? answers1[4] :
                answers1[5] ;
+    }
+
+    function getAnswer2(d) {
+        return d == 0.08 ? answers2[0] :
+               d >= 0.01 && d <= 0.5 ? answers2[1] :
+               answers2[2] ;
     }
 
     if (width<500){
@@ -144,7 +159,7 @@ $(document).ready(function() {
             console.log("guessed answer Y = " + guessY);  
             $('#guess-btn-2').prop('disabled',true);
             answered2 = 1;
-            // $("#answer2").html(getAnswer1(guessX));
+            $("#answer2").html(getAnswer2(guessY));
             chart3a.series[0].addPoint({
                 x:  0.08,
                 y:  10,
@@ -259,7 +274,7 @@ $(document).ready(function() {
                 },true,false);
                 $("#guess-value-2").html(guessY);
                 answered2 = 1;
-                // $("#answer2").html(getAnswer1(guessY));
+                $("#answer2").html(getAnswer2(guessY));
                 chart3a.series[0].addPoint({
                         x:  0.08,
                         y:  10,
@@ -286,7 +301,6 @@ $(document).ready(function() {
     $(".btnState").click(function(){
         if (clicked2 == 1){}else{
             var yourState = $(this).html(); 
-            console.log("your state = " + yourState);
             var dataStateWaterCat = [];
             for (var i = 0; i < dataStateWater.length; i++){
                 dataStateWaterCat.push(dataStateWater[i].name);
@@ -299,6 +313,31 @@ $(document).ready(function() {
             clicked2 = 1;
         }
     });
+
+    $(".btnPay").click(function(){
+        if (clicked3 == 1){}else{
+            var payAnswer = $(this).text();
+            console.log("payAnswer = " + payAnswer);
+            if(payAnswer == "Yes"){
+                $(".payExtra").fadeTo(500, 1);
+            } else {
+                $(".payExtra").hide();
+                $(".thankYou").fadeTo(500, 1);
+            }
+            clicked3 = 1;
+            $('.btnPay').prop('disabled',true);
+        }
+    })
+
+    $(".btnExtra").click(function(){
+        if (clicked4 == 1){} else {
+            var payExtra = $(this).text();
+            console.log("payExtra = " + payExtra);
+            clicked4 = 1;
+            $('.btnExtra').prop('disabled',true);
+            $(".thankYou").fadeTo(500, 1);
+        }        
+    })
 
     $("#chart-1-text-1").waypoint(function(direction) {
         if (direction === "down") {
