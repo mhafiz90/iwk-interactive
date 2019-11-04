@@ -5,9 +5,9 @@ $(document).ready(function() {
     var chart1a, chart1b, chart2, chart3a, chart3b; 
     var guessX, guessY;
     var answered1, answered2;
-    var clicked2, clicked3, clicked4;
-    var chart1Loaded;
-    var chart3Loaded;
+    var clicked2, clicked3, clicked4, clicked5;
+    var chart1Loaded, chart3Loaded;
+    var form1clicked, form2clicked, form3clicked;
 
     var answers1 = [
         "You’re a genius! You’ve got the exact answer. are you cheating? Only <span id='compareUser1'>0</span>% people before you got it right.",
@@ -322,10 +322,11 @@ $(document).ready(function() {
                 $(".payExtra").fadeTo(500, 1);
             } else {
                 $(".payExtra").hide();
-                $(".thankYou").fadeTo(500, 1);
+                $(".moreQuestions").fadeTo(500, 1);
             }
             clicked3 = 1;
             $('.btnPay').prop('disabled',true);
+            $(this).css({"background-color":"#999","color":"#fff"});
         }
     })
 
@@ -334,10 +335,56 @@ $(document).ready(function() {
             var payExtra = $(this).text();
             console.log("payExtra = " + payExtra);
             clicked4 = 1;
+            $(".moreQuestions").fadeTo(500, 1);
             $('.btnExtra').prop('disabled',true);
-            $(".thankYou").fadeTo(500, 1);
+            $(this).css({"background-color":"#999","color":"#fff"});
         }        
     })
+
+    $(".user-info-radio").click(function(){
+        console.log("radio clicked!");
+        if(this.name == "form1"){form1clicked = 1;}
+        if(this.name == "form2"){form2clicked = 1;}
+        if(this.name == "form3"){form3clicked = 1;}
+        if(form1clicked + form2clicked + form3clicked == 3){
+            $("#last-btn").fadeTo(500, 1);
+        }
+    })
+
+    $("#last-btn").click(function(){
+        if (clicked5 == 1){} else {
+            var userInputs = [];
+            var formInputs;
+            for(a = 0; a < document.forms.length; a++) {
+                formInputs = document.forms[a];
+                for (i = 0; i < formInputs.length; i++) {
+                    if (formInputs[i].checked) {
+                    userInputs.push(formInputs[i].value);
+                    }
+                    formInputs[i].disabled = true;
+                }          
+            }
+            console.log("userInputs = " + userInputs);
+            clicked5 = 1;
+            $('.last-btn').prop('disabled',true);
+            $(".thankYou").fadeTo(500, 1);
+        }        
+    })  
+
+
+    
+
+    function myFunction() {
+        var coffee = document.forms[0];
+        var txt = "";
+        var i;
+        for (i = 0; i < coffee.length; i++) {
+          if (coffee[i].checked) {
+            txt = txt + coffee[i].value + " ";
+          }
+        }
+        document.getElementById("order").value = "You ordered a coffee with: " + txt;
+      }
 
     $("#chart-1-text-1").waypoint(function(direction) {
         if (direction === "down") {
